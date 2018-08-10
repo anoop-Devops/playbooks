@@ -1,0 +1,12 @@
+---
+- hosts: server2
+  user: test
+  sudo: yes
+  tasks:
+    - name: creating users
+      user: name={{item}} state=present
+      with_items:
+        - user1
+        - user2
+        - user3
+        - user4

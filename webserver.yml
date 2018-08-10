@@ -1,0 +1,16 @@
+--- #sample playbook
+- hosts: server2
+  user: test
+  sudo: yes
+  gather_facts: yes
+  serial: 1
+  tasks:
+    - name: Install httpd package
+      yum: name=httpd state=installed
+    - name: copy index file
+      copy: src=index.html dest=/var/www/html/index.html
+    - name: start the httpd service
+      service: name=httpd state=started
+    - name: Checking Internet connection from ansible controller
+      command: ping -c 4 www.google.com
+      delegate_to: 127.0.0.1

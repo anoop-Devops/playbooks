@@ -1,0 +1,15 @@
+---
+- hosts: server2
+  user: test
+  sudo: yes
+  tasks:
+    - name: Install httpd package
+      command: yum install -y httpd creates=/var/www/html
+    - name: running shell module
+      shell: /bin/ls /etc > hhh
+    - name: running scripts
+      script: ./hello.sh
+    - name: copy index file
+      copy: src=index.html dest=/var/www/html/index.html
+    - name: start the httpd service
+      service: name=httpd state=started
